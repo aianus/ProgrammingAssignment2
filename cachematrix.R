@@ -1,15 +1,23 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
+## Create an object encapsulating a matrix with a getter, setter, and memoized getInverse function
 makeCacheMatrix <- function(x = matrix()) {
-
+  inverse = NULL
+  set = function(y) {
+    x <<- y
+    inverse <<- NULL
+  }
+  get = function() x
+  getInverse = function() {
+    if (is.null(inverse)) {
+      inverse <<- solve(x)
+    }
+    inverse
+  }
+  list(set=set,
+       get=get,
+       getInverse=getInverse)
 }
 
-
-## Write a short comment describing this function
-
+## I don't see the point of this function, but the assignment asked for it...
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  x$getInverse()
 }
